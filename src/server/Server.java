@@ -2,7 +2,6 @@ package server;
 
 import javax.jws.WebService;
 
-import java.util.ArrayList;
 
 import javax.jws.WebMethod;
 import javax.jws.soap.SOAPBinding;
@@ -18,23 +17,23 @@ public interface Server {
 	void inserirPais(Pais p);
 
 	@WebMethod
-	void inserirEstado(int idPais, Estado e);
+	void inserirEstado(Estado e);
 
 	@WebMethod
-	ArrayList<Pais> consultarPaises();
+	String consultarPaises();
 
 	@WebMethod
-	ArrayList<Estado> consultarEstados(int idPais);
+	String consultarEstados(int idPais);
 
 	@WebMethod
 	Pais atualizarPais(int id, Pais p);
 
 	@WebMethod
-	Estado atualizarEstado(int idPais, int id, Estado e);
+	Estado atualizarEstado(int id, Estado e);
 
 	@WebMethod
 	Pais deletarPais(int id);
 
 	@WebMethod
-	Estado deletarEstado(int idPais, int id);
+	Estado deletarEstado(int id);
 }

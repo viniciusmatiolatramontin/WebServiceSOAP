@@ -15,45 +15,49 @@ public class Client {
 	    Service ws = Service.create(url, qname);
 	    Server webService = ws.getPort(Server.class);
 
-	    Pais p1 = new Pais("Brasil", "Português", 0.765, "Tropical");
-	    Pais p2 = new Pais("Russia", "Russo", 0.824, "Temperado");
-	    Pais p3 = new Pais("India", "Hindi", 0.65, "Tropical de monsões");
-	    Pais p4 = new Pais("China", "Mandarim", 0.758, "Monsões continentais");
-	    Pais p5 = new Pais("Africa do Sul", "Africâner", 0.597, "Semiarido");
+	    Pais p1 = new Pais(1,"Brasil", "Português", 0.765, "Tropical");
+	    Pais p2 = new Pais(2,"Russia", "Russo", 0.824, "Temperado");
+	    Pais p3 = new Pais(3,"India", "Hindi", 0.65, "Tropical de monsões");
+	    Pais p4 = new Pais(4,"China", "Mandarim", 0.758, "Monsões continentais");
+	    Pais p5 = new Pais(5,"Africa do Sul", "Africâner", 0.597, "Semiarido");
+	    
 	    
 	    webService.inserirPais(p1);
 	    webService.inserirPais(p2);
 	    webService.inserirPais(p3);
 	    webService.inserirPais(p4);
 	    webService.inserirPais(p5);
+	
+	    Estado e1 = new Estado(1,"Santa Catarina", "Sul", "Subtropical", 65.3, p1);
+	    Estado e2 = new Estado(2,"Bahia", "Nordeste", "Tropical", 28.3,p1);
+	    Estado e3 = new Estado(3,"Heilongjiang", "Nordeste", "Semiarido", 8,p4);
+	    Estado e4 = new Estado(4,"Jilin", "Nordeste", "Semiarido", 140,p4);
 	    
-	    Estado e1 = new Estado("Santa Catarina", "Sul", "Subtropical", 65.3);
-	    Estado e2 = new Estado("Bahia", "Nordeste", "Tropical", 28.3);
-	    Estado e3 = new Estado("Heilongjiang", "Nordeste", "Semiarido", 8);
-	    Estado e4 = new Estado("Jilin", "Nordeste", "Semiarido", 140);
+	    webService.inserirEstado(e1);
+	    webService.inserirEstado(e2);
 	    
-	    webService.inserirEstado(0, e1);
-	    webService.inserirEstado(0, e2);
-	    
-	    webService.inserirEstado(3, e3);
-	    webService.inserirEstado(3, e4);
+	    webService.inserirEstado(e3);
+	    webService.inserirEstado(e4);
 	    
 	    System.out.println(webService.consultarPaises());
+	    System.out.println("---------------ESTADOS---------------");
+	    System.out.println(webService.consultarEstados(1));
+	    webService.deletarEstado(1); // del sc
+	    webService.deletarPais(2); //deletar russia
+	    System.out.println("---------------DEPOIS DE EXCLUIR---------------");
+	    System.out.println(webService.consultarPaises());
+	    System.out.println("---------------ESTADOS---------------");
+	    System.out.println(webService.consultarEstados(1));
 	    
-	    for(Pais p : webService.consultarPaises()) {
-	    	System.out.println(p.getNome());
-	    	System.out.println(p.getIDH());
-	    	System.out.println(p.getIdioma());
-	    	System.out.println(p.getClimaPred());
-	    	System.out.println("Estados: [");
-		    for(Estado e : webService.consultarEstados(webService.consultarPaises().indexOf(p))) {
-		    	System.out.println(e.getNome());
-		    	System.out.println(e.getDensidadeDemo());
-		    	System.out.println(e.getRegiao());
-		    	System.out.println(e.getClimaPred());
-		    }
-	    	System.out.println("]");
-	    	System.out.println("---------------------------------------------------------------------");
-	    }
+	    e4.setNome("Sao Paulo");
+	    webService.atualizarEstado(4,e4);
+	    p1.setIDH(0.95);
+	    webService.atualizarPais(1, p1);
+	    
+	    System.out.println("---------------DEPOIS DE EDITAR---------------");
+	    System.out.println(webService.consultarPaises());
+	    System.out.println("---------------ESTADOS---------------");
+	    System.out.println(webService.consultarEstados(4));
+	    
 	  }
 }

@@ -1,22 +1,45 @@
 package model;
 
+import java.util.Objects;
+
 public class Estado {
 	private String nome;
+	private Pais pais;
 	private String regiao;
 	private String climaPred;
 	private double densidadeDemo;
+	private int id; 
 	
 	public Estado() {
 		
 	}
 	
-	public Estado(String nome, String regiao, String climaPred, double densidadeDemo) {
+	public Estado(int id,String nome, String regiao, String climaPred, double densidadeDemo, Pais pais) {
+		this.setId(id);
 		this.setNome(nome);
 		this.setRegiao(regiao);
 		this.setClimaPred(climaPred);
 		this.setDensidadeDemo(densidadeDemo);
+		this.setPais(pais);
 	}
 	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Pais getPais() {
+		return pais;
+	}
+
+	public void setPais(Pais pais) {
+		this.pais = pais;
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -64,6 +87,24 @@ public class Estado {
 		
 		this.densidadeDemo = densidadeDemo;
 	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Estado other = (Estado) obj;
+		return Objects.equals(climaPred, other.climaPred)
+				&& Double.doubleToLongBits(densidadeDemo) == Double.doubleToLongBits(other.densidadeDemo)
+				&& Objects.equals(nome, other.nome) && Objects.equals(pais, other.pais)
+				&& Objects.equals(regiao, other.regiao);
+	}
+	
 	
 	
 }

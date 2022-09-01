@@ -1,23 +1,35 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.Objects;
 
 public class Pais {
 	private String nome;
 	private String idioma;
 	private double IDH;
 	private String climaPred;
-	private ArrayList<Estado> estados = new ArrayList<>();
+	private int id;
 	
+	
+
 	public Pais() {
 		
 	}
 	
-	public Pais(String nome, String idioma, double IDH, String climaPred) {
+	public Pais(int id, String nome, String idioma, double IDH, String climaPred) {
+		this.setId(id);
 		this.setNome(nome);
 		this.setIdioma(idioma);
 		this.setIDH(IDH);
 		this.setClimaPred(climaPred);
+	}
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public String getNome() {
@@ -66,15 +78,21 @@ public class Pais {
 		
 		this.climaPred = climaPred;
 	}
-	
-	public ArrayList<Estado> getEstados() {
-		return estados;
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pais other = (Pais) obj;
+		return Objects.equals(nome, other.nome);
 	}
 	
-	public void addEstado(Estado estado) {
-		if(estado.equals(null)) {
-			throw new IllegalArgumentException("Estado inválido, valor nulo!");
-		}
-		estados.add(estado);
-	}
+	
+	
+	
 }
